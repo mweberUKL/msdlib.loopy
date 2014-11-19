@@ -92,15 +92,15 @@ public class GUI {
 
         bdlFileTextField = new JTextField();
         bdlFileTextField.setToolTipText("Select BDL file to be parsed here");
-//        bdlFileTextField.setText(config.bdlFile().getAbsolutePath());
-//        bdlFileTextField.getDocument().addDocumentListener(new DocumentListener() {
-//            public void removeUpdate(DocumentEvent arg0)  { contentChanged(); }
-//            public void insertUpdate(DocumentEvent arg0)  { contentChanged(); }
-//            public void changedUpdate(DocumentEvent arg0) { contentChanged(); }
-//            private void contentChanged() {
-//                config.setBDLFile(new File(bdlFileTextField.getText()));
-//            }
-//        });
+        bdlFileTextField.setText(config.getBDLFile().getAbsolutePath());
+        bdlFileTextField.getDocument().addDocumentListener(new DocumentListener() {
+            public void removeUpdate(DocumentEvent arg0)  { contentChanged(); }
+            public void insertUpdate(DocumentEvent arg0)  { contentChanged(); }
+            public void changedUpdate(DocumentEvent arg0) { contentChanged(); }
+            private void contentChanged() {
+                config.setBDLFile(new File(bdlFileTextField.getText()));
+            }
+        });
         GridBagConstraints gbc_bdlFileTextField = new GridBagConstraints();
         gbc_bdlFileTextField.fill = GridBagConstraints.HORIZONTAL;
         gbc_bdlFileTextField.insets = new Insets(0, 0, 0, 5);
@@ -115,10 +115,10 @@ public class GUI {
             @Override
             public void mouseReleased(MouseEvent e) {
                 bdlFileChooser.showOpenDialog(fileSelectPanel);
-//                if (bdlFileChooser.showOpenDialog(fileSelectPanel) == JFileChooser.APPROVE_OPTION) {
-////                    bdlFile = bdlFileChooser.getSelectedFile();
-////                    bdlFileTextField.setText(bdlFile.getPath());
-//                }
+                if (bdlFileChooser.showOpenDialog(fileSelectPanel) == JFileChooser.APPROVE_OPTION) {
+                    bdlFile = bdlFileChooser.getSelectedFile();
+                    bdlFileTextField.setText(bdlFile.getPath());
+                }
             }
         });
         GridBagConstraints gbc_bdlFileSelect = new GridBagConstraints();
@@ -477,7 +477,7 @@ public class GUI {
         gbc_logLevelDebug.gridy = 1;
         logLevelPanel.add(logLevelDebug, gbc_logLevelDebug);
 
-        config.printConfig();
+        //config.printConfig();
              if(config.DEBUG())   logLevelDebug.setSelected(true);
         else if(config.VERBOSE()) logLevelVerbose.setSelected(true);
         else if(config.INFO())    logLevelInfo.setSelected(true);
